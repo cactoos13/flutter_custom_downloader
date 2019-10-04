@@ -11,5 +11,4 @@ class Downloadable {
     this.fileName = p.basename(url).toString();
   }
 //  int progress;
-
 }

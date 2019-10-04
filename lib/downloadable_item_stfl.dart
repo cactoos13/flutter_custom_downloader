@@ -26,7 +26,6 @@ class DownloadableItemSTFL extends StatefulWidget {
 
 class _DownloadableItemState extends State<DownloadableItemSTFL> {
   double progress = 0;
-//  Timer timer;
 
 //  bool _permissionReady = true;
   bool _exists = false;
@@ -40,14 +39,8 @@ class _DownloadableItemState extends State<DownloadableItemSTFL> {
     super.initState();
     dio = Dio();
 //    _isLoading = true;
-//    _permissisonReady = false;
+//    _permissionReady = false;
     _prepare();
-  }
-
-  @override
-  void dispose() {
-//    timer?.cancel();
-    super.dispose();
   }
 
   @override
@@ -69,12 +62,9 @@ class _DownloadableItemState extends State<DownloadableItemSTFL> {
         subtitle: !_downloading
             ? Container()
             : LinearProgressIndicator(
-//          value: progress / 100,
                 value: progress,
               ),
-//        onTap: widget.function,
         onTap: () {
-//          startTimer();
           if (_exists) {
             print('open');
             OpenFile.open(_filePath);
@@ -90,25 +80,11 @@ class _DownloadableItemState extends State<DownloadableItemSTFL> {
   }
 
   void deleteFile() {
-//    widget.deleteFunction(widget.id);
     File(_filePath).delete();
     setState(() {
       _exists = false;
     });
   }
-
-//  void startTimer() {
-//    if (timer != null && timer.isActive) {
-//      setState(() {
-//        progress = 0;
-//      });
-//      timer.cancel();
-//    }
-//    timer = Timer.periodic(Duration(seconds: 1), (timer) {
-//      increment();
-//      //            print(timer.tick);
-//    });
-//  }
 
   void increment() {
     setState(() {
@@ -117,12 +93,10 @@ class _DownloadableItemState extends State<DownloadableItemSTFL> {
   }
 
   Future download(Dio dio, String url, savePath) async {
-//    print('in download');
     setState(() {
       _downloading = true;
     });
     try {
-//      print('in try');
       await dio.download(
         url,
         savePath,
@@ -171,25 +145,25 @@ class _DownloadableItemState extends State<DownloadableItemSTFL> {
     return directory.path;
   }
 
-//  Future<bool> _checkPermission() async {
-////    if (widget.platform == TargetPlatform.android) {
-//    PermissionStatus permission = await PermissionHandler()
-//        .checkPermissionStatus(PermissionGroup.storage);
-//    if (permission != PermissionStatus.granted) {
-//      Map<PermissionGroup, PermissionStatus> permissions =
-//          await PermissionHandler()
-//              .requestPermissions([PermissionGroup.storage]);
-//      if (permissions[PermissionGroup.storage] == PermissionStatus.granted) {
-//        return true;
-//      }
+  Future<bool> _checkPermission() async {
+//    if (widget.platform == TargetPlatform.android) {
+    PermissionStatus permission = await PermissionHandler()
+        .checkPermissionStatus(PermissionGroup.storage);
+    if (permission != PermissionStatus.granted) {
+      Map<PermissionGroup, PermissionStatus> permissions =
+          await PermissionHandler()
+              .requestPermissions([PermissionGroup.storage]);
+      if (permissions[PermissionGroup.storage] == PermissionStatus.granted) {
+        return true;
+      }
+    } else {
+      return true;
+    }
 //    } else {
 //      return true;
 //    }
-////    } else {
-////      return true;
-////    }
-//    return false;
-//  }
+    return false;
+  }
 
   void updateDownloadProgress(received, total) {
     print('in show progress');

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:io';
 
@@ -5,9 +6,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:custom_downloader/downloadable_item_stfl.dart';
 
-import 'downloadable_item.dart';
 import 'downloadable_model.dart';
-import 'package:flutter/material.dart';
 
 class MyHomePageSTFL extends StatefulWidget {
   @override
@@ -80,23 +79,6 @@ class _MyHomePageSTFLState extends State<MyHomePageSTFL> {
     );
   }
 
-//  void increment(int index) {
-//    setState(() {
-//      progressList[index]++;
-//    });
-//  }
-//
-//  void incrementAll() {
-//    for (int i = 0; i < downloadables.length; i++) {
-//      increment(i);
-//    }
-//  }
-//
-//  void incrementInOrder() {
-//    for (int i = 0; i < downloadables.length; i++) {
-//      increment(i);
-//    }
-//  }
 
   void removeItem(int index) {
     setState(() {
@@ -145,5 +127,4 @@ class _MyHomePageSTFLState extends State<MyHomePageSTFL> {
     final directory = await getExternalStorageDirectory();
     return directory.path;
   }
-
 }

@@ -1,6 +1,6 @@
 # custom_downloader
 
-A new Flutter project.
+A custom downloader.
 
 ## Getting Started
 
