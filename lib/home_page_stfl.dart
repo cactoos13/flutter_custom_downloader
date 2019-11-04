@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:io';
 
+import 'package:custom_downloader/downloadable_item_stfl.dart';
+import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:custom_downloader/downloadable_item_stfl.dart';
 
 import 'downloadable_model.dart';
 
@@ -32,6 +32,7 @@ class _MyHomePageSTFLState extends State<MyHomePageSTFL> {
     progressList = List.generate(downloadables.length, (int index) => 0);
 //    hasPermission = _checkPermission();
     _checkPermission();
+    _createDirectory();
 
 
 //    Timer.periodic(Duration(seconds: 1), (timer) {
@@ -126,5 +127,15 @@ class _MyHomePageSTFLState extends State<MyHomePageSTFL> {
   Future<String> _findLocalPath() async {
     final directory = await getExternalStorageDirectory();
     return directory.path;
+  }
+
+  Future _createDirectory() async {
+    _localPath = (await _findLocalPath()) + '/Download';
+    var exists = await Directory(_localPath).exists();
+    if (!exists) {
+      print('created directory');
+      final savedDir = Directory(_localPath);
+      savedDir.create();
+    }
   }
 }
